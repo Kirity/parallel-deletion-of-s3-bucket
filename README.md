@@ -1,0 +1,1 @@
+# lambda-parallel-deletion-of-s3-buecket

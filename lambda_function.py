@@ -12,10 +12,7 @@ def empty_the_s3_path(bucket, prefix):
     print('bucket_name = ',bucket, 'prefix = ', prefix)
     object_response_paginator = s3_client.get_paginator('list_object_versions')
     operation_parameters = {'Bucket': bucket, 'Prefix': prefix}
-    delete_version_list = []
-    msgs_count = 0
-    batch_size = 500
-    start_time = 0
+    delete_version_list = []    
     read_count = 0
     
     for object_response_itr in object_response_paginator.paginate(**operation_parameters):

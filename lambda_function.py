@@ -31,21 +31,16 @@ def empty_the_s3_path(bucket, prefix):
             for version in object_response_itr['Versions']:
                 delete_version_list.append({'Key': version['Key'], 'VersionId': version['VersionId']})
                 #print('version[Key] = ', version['Key'])
-        try:
-            #for i in range(0, len(delete_version_list), batch_size):
-            #'Objects': delete_version_list[i:i+batch_size],
-            #print('length of batch_size = ', len(delete_version_list))
-            #print(int(round(time.time() * 1000)))
-            #start_time = int(round(time.time() * 1000))
+        try:            
             response = s3_client.delete_objects(
             Bucket=bucket,
             Delete={
                 'Objects': delete_version_list,
                 'Quiet': True}
-            )
-            #print('time_diff_in_milli =', int(round(time.time() * 1000)) - int(start_time))
+            )            
             #print(response)
             #print('{0}/{1} Delete HTTPStatusCode={2}'.format(bucket, prefix, response['ResponseMetadata']['HTTPStatusCode']))
+            """ Enalbe sleep when required"""
             #time.sleep(0.3)
         except Exception as ex:
             print("An exception occurred"+ str(ex))    
@@ -58,8 +53,7 @@ def empty_the_s3_path(bucket, prefix):
         #print('len(delete_version_list) = ', len(delete_version_list))
 
 def lambda_handler(event, context):
-    #print('multiprocessing.cpu_count() =', multiprocessing.cpu_count())
-    #exit()
+    #print('multiprocessing.cpu_count() =', multiprocessing.cpu_count())    
     print('event = ', event)
     print('bucket_name = ', event['bucket_name'])
     print('prefix_list = ', event['prefix_list'])

@@ -24,8 +24,9 @@ The complete solution looks as below:
 
 ![s3_diagram drawio](https://user-images.githubusercontent.com/15073157/184546231-8a56f13e-01e9-4ec9-ad6b-68c397c2ca8d.png)
 
+                       This figure illustrates the architecture of the solution proposed
 
-# How to run?
+# How to invoke the Lambda?
 Create a Lambda function with the code in the file "lambda_function.py"
 
 This function would take two parameters: bucket_name, prefix_list
@@ -35,7 +36,7 @@ Example :
 {'bucket_name': 'fill-in-the-bucket-name', 'prefix_list': "['prefix/1/1','prefix/2/2']"}
 ```
 
-# Test files creation
+# Lambda to generate test objects
 Another helper Lambda is creted to generate the test files for testing purposes.
 
 Code is present in file s3_files_creation.py

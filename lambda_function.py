@@ -37,7 +37,7 @@ def empty_the_s3_path(bucket, prefix):
             )            
             #print(response)
             #print('{0}/{1} Delete HTTPStatusCode={2}'.format(bucket, prefix, response['ResponseMetadata']['HTTPStatusCode']))
-            """ Enalbe sleep when required"""
+            """ Enalbe sleep when required. Please refer the documentation for further information on this"""
             #time.sleep(0.3)
         except Exception as ex:
             print("An exception occurred"+ str(ex))    

@@ -22,6 +22,9 @@ The complete solution looks as below:
 
 3. Create and schedule the EB rule to call the above Lambda three times in the same rule with input as bucket_name and prefixes_list for every 15/16 minutes.
 
+![s3_diagram drawio](https://user-images.githubusercontent.com/15073157/184546231-8a56f13e-01e9-4ec9-ad6b-68c397c2ca8d.png)
+
+
 # How to run?
 Create a Lambda function with the code in the file "lambda_function.py"
 

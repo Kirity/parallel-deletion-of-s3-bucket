@@ -13,11 +13,11 @@ def empty_the_s3_path(bucket, prefix):
     object_response_paginator = s3_client.get_paginator('list_object_versions')
     operation_parameters = {'Bucket': bucket, 'Prefix': prefix}
     delete_version_list = []    
-    read_count = 0
+    page_read_count = 0
     
     for object_response_itr in object_response_paginator.paginate(**operation_parameters):
-        read_count = read_count + 1
-        print("read_count = ", read_count)
+        page_read_count = page_read_count + 1
+        print("page_read_count = ", page_read_count)
         #print('object_response_itr = ', object_response_itr)
         if 'DeleteMarkers' in object_response_itr:
             for delete_marker in object_response_itr['DeleteMarkers']:

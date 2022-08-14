@@ -5,8 +5,7 @@ import json
 from multiprocessing import Process
 import time
 
-def empty_the_s3_path(bucket, prefix):
-    exp_inc_step = 1
+def empty_the_s3_path(bucket, prefix):    
     time_to_sleep = 0
     s3_client = boto3.client('s3', region_name='eu-west-1')
     print('bucket_name = ',bucket, 'prefix = ', prefix)

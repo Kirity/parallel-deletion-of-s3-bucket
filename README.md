@@ -7,7 +7,8 @@ S3 allows up to 3500 write requests on each prefix in the S3 buckets with DELETE
 The solution will use Lambda for the computing and EventBridge(EB) rules for the scheduling.
 
 The complete solution looks as below:
-Create a Lambda service role that has read and delete permission on the respective S3 bucket.
+
+1. Create a Lambda service role that has read and delete permission on the respective S3 bucket.
 
 2. Write a Lambda function(GitHub link) with the following features:
 It takes bucket_name and prefixes_list as input

@@ -35,4 +35,16 @@ Example :
 {'bucket_name': 'fill-in-the-bucket-name', 'prefix_list': "['prefix/1/1','prefix/2/2']"}
 ```
 
+# Test files creation
+Another helper Lambda is creted to generate the test files for testing purposes.
+
+Code is present in file s3_files_creation.py
+This will take three parameters: bucket
+Input:
+```
+{'bucket_name': 'your-bucket-name', 'bucket_paths': "['path/1/1/','path/1/2/']", 'no_of_files': 1000}
+```
+
+
+
 A detailed blog post [blog post](https://medium.com/@rapurukirity/deletion-of-millions-of-objects-from-versioning-enabled-aws-s3-822461437d41) is written, which would cover in-depth details, discussions and tests results.

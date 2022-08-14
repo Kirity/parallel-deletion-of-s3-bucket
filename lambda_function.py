@@ -5,9 +5,10 @@ import json
 from multiprocessing import Process
 import time
 
+s3_client = boto3.client('s3', region_name='eu-west-1')
+
 def empty_the_s3_path(bucket, prefix):    
-    time_to_sleep = 0
-    s3_client = boto3.client('s3', region_name='eu-west-1')
+    time_to_sleep = 0    
     print('bucket_name = ',bucket, 'prefix = ', prefix)
     object_response_paginator = s3_client.get_paginator('list_object_versions')
     operation_parameters = {'Bucket': bucket, 'Prefix': prefix}

@@ -35,4 +35,4 @@ Example :
 {'bucket_name': 'fill-in-the-bucket-name', 'prefix_list': "['prefix/1/1','prefix/2/2']"}
 ```
 
-Detailed explantion can found in this [blog post](https://medium.com/@rapurukirity/deletion-of-millions-of-objects-from-versioning-enabled-aws-s3-822461437d41)
+A detailed blog post [blog post](https://medium.com/@rapurukirity/deletion-of-millions-of-objects-from-versioning-enabled-aws-s3-822461437d41) is written, which would cover in-depth details, discussions and tests results.

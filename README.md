@@ -1,5 +1,6 @@
-# lambda-parallel-deletion-of-s3-buecket
-This project is an AWS Lambda function, which is used to delete the objects from an versioning enabled bucket
+# Context
+Deletion or empty of versioning enalbed AWS S3 bucket is tedious. There is no simple option to do in single go especially if the bucket contains millions of files.
+In this project a programatic approach is employed to do this job.
 
 # How to run?
 Create a Lambda function with the code in the file "lambda_function.py"

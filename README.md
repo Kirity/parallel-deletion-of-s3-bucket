@@ -1,6 +1,8 @@
 # Context
 Deletion or empty of versioning enalbed AWS S3 bucket is a tedious job. 
-There is no simple option to do in a single go especially if the bucket contains millions of files.
+
+There is no simple option to do in a single go especially if the bucket contains millions of files(as on July-2022).
+
 In this project a programatic approach is employed to do this job and we try to reach the maximum limits offered by the S3 to delete objects at full throttle.
 
 # Solution
@@ -13,7 +15,7 @@ The complete solution looks as below:
 
 1. Create a Lambda service role that has read and delete permission on the respective S3 bucket.
 
-2. Write a Lambda function(GitHub link) with the following features:
+2. Write a Lambda function ```lambda_function.py```   with the following features:
 - It takes bucket_name and prefixes_list as input
 - Each prefix will create a sub-process
 - Using the boto3 S3 client and using pagination, get 1000 object versions in a single GET request

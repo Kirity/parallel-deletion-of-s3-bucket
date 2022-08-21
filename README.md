@@ -34,33 +34,33 @@ The complete solution looks as below:
 
 This is to take advantage of the vCPUs offered by Lambda. Thereby deletion would happen in parallel rather than in a serial way.
 
-**Why fetch only 1000 object-version?
+**Why fetch only 1000 object-version?**
 
 A GET request supports a max of 1000 at a time, while pagination and batch delete only support up to 1000 at a time. Here, we are deleting 1000 objects (considering each version as an object) in a prefix at a time.
 
-**Why call Lambda three times with a single with an EB rule?
+**Why call Lambda three times with a single with an EB rule?**
 
 Since S3 supports up to 3500 deletes on a prefix, if we invoke the same Lambda three times with an EB rule, we are taking advantage of Lambda concurrency and achieving the rate of 3000 deletes. Currently, the EB rule supports up to five target invocations, but we go with three to stay within the throttling limits of S3.
 
-**Why schedule for every 15/16 minutes in EB rule?
+**Why schedule for every 15/16 minutes in EB rule?**
 
 This would automate the repeated invocations for every 15/16 min.
 
 As Lambda’s maximum execution time is 15min, it would automatically stop execution after 15min. Therefore an option is to automate the triggering of the Lambda in a loop until all the objects are entirely deleted. Scheduling every 16min is to ensure that there would not be more than three concurrent invocations at any given time in order not to overwhelm S3(to avoid throttling exceptions).
 
 
-**How much should the timeout value be for the Lambda function?
+**How much should the timeout value be for the Lambda function?**
 
 Set it to the maximum allowed value i.e., 15 min.
 
 
-**How many vCPUs should be configured to the Lambda?
+**How many vCPUs should be configured to the Lambda?**
 
 The only way to increase/decrease the CPUs is to increase/decrease the memory setting. One can set memory between 128–10240 MB, and Lambda will allocate a vCPUs proposal to the set memory.
 
 Set the memory to the maximum allowed value, i.e., 10240 MB thereby, the allocated vCPUs would be six.
 
-**How many S3 prefixes be used to invoke S3 Lambda from EB?
+**How many S3 prefixes be used to invoke S3 Lambda from EB?**
 
 Since Lambda only supports a maximum of six vCPUs, it would be ideal to utilize six prefixes.
 

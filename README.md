@@ -66,6 +66,60 @@ Since Lambda only supports a maximum of six vCPUs, it would be ideal to utilize 
 
 The idea is to create six threads in the Lambda for the six input prefixes.
 
+# Testing the solution
+
+**Test 01: Using six cores of Lambda and with six prefixes in the test S3 bucket**
+
+Objects in the bucket are varied from 0.1Million to 0.4Million, with six prefixes in the bucket, six Lambda vCPU cores, concurrently as six.
+
+It is noticed that S3 throttling errors are observed during tests. Though S3 says it supports 3,500 PUT/COPY/POST/DELETE or 5,500 GET/HEAD requests per second per prefix in an Amazon S3 bucket, throttling errors are observed.
+
+![image](https://user-images.githubusercontent.com/15073157/185805092-306b841b-2c56-4fba-aa3e-8bccefdf6761.png)
+         
+         S3 throttling errors
+
+The errors would slow down the process. To avoid this, sleep time was set between each delete operation.
+
+![image](https://user-images.githubusercontent.com/15073157/185805113-f23cf979-7dfa-4329-bf0f-3c8288372c9b.png)
+
+          Test 01 results
+
+
+With the fine-tuning of the sleep time, a deletion rate of 0.49ms/Object was achieved. With this, we can calculate the total deletion time for the bigger bucket sizes with the above-obtained values.
+
+![image](https://user-images.githubusercontent.com/15073157/185805120-784d1e0b-2347-4ea2-a0fc-d63690013263.png)
+          
+                              Time and money for various S3 bucket sizes
+
+**Test results:**
+
+For 10 million/prefix with the programmatic solution would take about 1.3Hours and cost around 41$.
+
+
+**Test 02: Effectiveness of the concurrency**
+
+
+Tests are conducted to evaluate the effectiveness of concurrency with objects/prefix and Lambda cores(vCPUs) as constant and varying concurrency in the Lambda.
+
+Objects/prefix as 12000
+
+VCPUs of Lambda as 6
+
+![image](https://user-images.githubusercontent.com/15073157/185805143-cdfbe517-9c90-4d29-9506-aeff79f61325.png)
+    
+                                        Time and concurrency
+
+![image](https://user-images.githubusercontent.com/15073157/185805159-39b74207-2d64-4e86-a781-28a615c971ad.png)
+
+                      Graph with concurrency(x-axis) vs time in seconds(y-axis)
+
+
+**Test observations:**
+
+Here we can observe that deletion time decreased as we increased the concurrency up to value four. Theoretically, it should decrease till value six, but after value four, there could have been empty deletes that might have been sent. After value six, the value jumped because Lambda supports a max of six cores hence there were more threads than available cores, so there would be a waiting time for the thread executions. This explains the sharp jump.
+
+
+
 
 # How to invoke the Lambda?
 Create a Lambda function with the code in the file "lambda_function.py"

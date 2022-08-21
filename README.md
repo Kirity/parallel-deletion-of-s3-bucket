@@ -26,7 +26,7 @@ The complete solution looks as below:
 
 ![s3_diagram drawio](https://user-images.githubusercontent.com/15073157/184546231-8a56f13e-01e9-4ec9-ad6b-68c397c2ca8d.png)
 
-                       This figure illustrates the architecture of the solution proposed
+(This figure illustrates the architecture of the solution proposed)
 
 # Discussion on the solution configurations:
 
@@ -75,21 +75,20 @@ Objects in the bucket are varied from 0.1Million to 0.4Million, with six prefixe
 It is noticed that S3 throttling errors are observed during tests. Though S3 says it supports 3,500 PUT/COPY/POST/DELETE or 5,500 GET/HEAD requests per second per prefix in an Amazon S3 bucket, throttling errors are observed.
 
 ![image](https://user-images.githubusercontent.com/15073157/185805092-306b841b-2c56-4fba-aa3e-8bccefdf6761.png)
-         
-         S3 throttling errors
+        
+(S3 throttling errors)
 
 The errors would slow down the process. To avoid this, sleep time was set between each delete operation.
 
 ![image](https://user-images.githubusercontent.com/15073157/185805113-f23cf979-7dfa-4329-bf0f-3c8288372c9b.png)
-
-          Test 01 results
+(Test 01 results)
 
 
 With the fine-tuning of the sleep time, a deletion rate of 0.49ms/Object was achieved. With this, we can calculate the total deletion time for the bigger bucket sizes with the above-obtained values.
 
 ![image](https://user-images.githubusercontent.com/15073157/185805120-784d1e0b-2347-4ea2-a0fc-d63690013263.png)
-          
-                              Time and money for various S3 bucket sizes
+
+(Time and money for various S3 bucket sizes)
 
 **Test results:**
 
@@ -106,12 +105,12 @@ Objects/prefix as 12000
 VCPUs of Lambda as 6
 
 ![image](https://user-images.githubusercontent.com/15073157/185805143-cdfbe517-9c90-4d29-9506-aeff79f61325.png)
-    
-                                        Time and concurrency
+
+(Time and concurrency)
 
 ![image](https://user-images.githubusercontent.com/15073157/185805159-39b74207-2d64-4e86-a781-28a615c971ad.png)
 
-                      Graph with concurrency(x-axis) vs time in seconds(y-axis)
+(Graph with concurrency(x-axis) vs time in seconds(y-axis))
 
 
 **Test observations:**
